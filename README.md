@@ -7,7 +7,7 @@ Stuff goes here
 # Tools
 
 In order to build / develop the application, you need to have the following tools installed:
-* nodejs - something v8 or v9, do not install v10 https://nodejs.org/en/
+* nodejs - v10 https://nodejs.org/en/
 * yarn   - https://yarnpkg.com/en/
 
 # Setup
@@ -24,6 +24,12 @@ yarn dev
 
 # build distrubution files - installer for current platform
 yarn dist
+
+# run automated test suite
+yarn test
+
+# run automated test suite with 'hot re-testing' as you change files
+yarn test:watch
 ```
 
 #### Note on Logo
