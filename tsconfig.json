@@ -5,6 +5,7 @@
         "jsx": "react",
         "baseUrl": "./src/renderer",
         "experimentalDecorators": true,
+        "module": "commonjs",
         "paths": {
             "@controllers/*":["controllers/*"],
             "@components/*":["react-components/*"],
