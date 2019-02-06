@@ -1,0 +1,10 @@
+.DS_Store
+dist/
+logs/
+node_modules/
+thumbs.db
+.vscode
+yarn-error.log
+package-lock.json
+.idea/
+src/static/bay-ip-mapping.json

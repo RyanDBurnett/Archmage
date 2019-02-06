@@ -1,0 +1,14 @@
+{
+    "extends": "./node_modules/electron-webpack/tsconfig-base.json",
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "jsx": "react",
+        "baseUrl": "./src/renderer",
+        "experimentalDecorators": true,
+        "paths": {
+            "@controllers/*":["controllers/*"],
+            "@components/*":["react-components/*"],
+            "@shared/*":["shared/*"]
+        }
+    }
+}
