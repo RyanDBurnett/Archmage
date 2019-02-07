@@ -1,14 +1,16 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
+import { CharacterProfileCard } from './character-profile/character-profile-card';
+import Store from '@controllers/store';
 
 interface ICharacterEditorProps {
-    store: any
+    store: Store
 }
 
 @observer export class CharacterEditor extends React.Component<ICharacterEditorProps> {
     public render() {
         return (
-            <input type='text' value={this.props.store.characterName} onChange={(event) => this.props.store.characterName = event.target.value} />
+            <CharacterProfileCard profile={this.props.store.profile} />
         );
     }
 };

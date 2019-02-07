@@ -8,7 +8,7 @@
         "module": "commonjs",
         "paths": {
             "@controllers/*":["controllers/*"],
-            "@components/*":["react-components/*"],
+            "@components/*":["components/*"],
             "@shared/*":["shared/*"]
         }
     }

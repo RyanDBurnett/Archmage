@@ -1,6 +1,6 @@
 // import * as D from '@shared/debug';
 
-import { Store } from '@controllers/store';
+import Store from '@controllers/store';
 
 import * as React from 'react';
 import { observer } from 'mobx-react';
@@ -23,6 +23,7 @@ const App = observer(
 
             return (
                 <div className='App'>
+                    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"></link>
                     <CharacterEditor store={this.props.store} />
                 </div>
             );

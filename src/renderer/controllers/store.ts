@@ -1,16 +1,13 @@
 // import * as C from '@shared/const';
 // import * as D from '@shared/debug';
 
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
+import Profile from './profile/profile';
 
 export default class Store {
-    @observable characterName: string;
+    @observable profile: Profile;
 
     constructor() {
-        this.characterName = '';
-    }
-
-    @action setCharacterName(newName: string) {
-        this.characterName = newName;
+        this.profile = new Profile();
     }
   }

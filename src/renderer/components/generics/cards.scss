@@ -1,0 +1,15 @@
+.card {
+    // These numbers are currently 100% arbitrary
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.25);
+
+    &__data {
+        display: flex;
+        justify-content: space-between;
+    }
+}
