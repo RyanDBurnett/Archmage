@@ -32,4 +32,4 @@ export default class Store {
         const parsedData = JSON.parse(loadedData.toString());
         this.profile = parsedData.profile;
     }
-  }
+}
