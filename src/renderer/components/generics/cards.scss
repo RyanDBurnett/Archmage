@@ -11,5 +11,27 @@
     &__data {
         display: flex;
         justify-content: space-between;
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
     }
+
+    &__value {
+        padding: 1px;
+        border: 1px solid transparent;
+    }
+
+    &__field {
+        &__editor {
+            padding: 1px;
+            border: 1px solid black;
+            text-align: right;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 14px;
+        }
+    }
+}
+
+.edit-mode-button {
+    display: inline-block;
 }

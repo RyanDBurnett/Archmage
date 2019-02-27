@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     box-sizing: border-box;
   }
@@ -20,4 +24,21 @@ body {
 
 .title {
     font-family: 'Tangerine', cursive;
+    margin-bottom: .5em;
+}
+
+.button {
+    margin: .5em 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    transition: background-color .25s;
+
+    &:hover {
+        background-color: #DDDDDD;
+    }
+}
+
+h1 {
+    margin: 0;
 }

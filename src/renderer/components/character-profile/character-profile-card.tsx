@@ -27,7 +27,8 @@ interface ICharacterProfileCardState {
             <div className='card character-profile-card'>
                 <h1 className='title card__title'>Profile</h1>
 
-                <div className='button edit-mode-button' onClick={() => this.setState({isEditingEnabled: !isEditingEnabled})}>
+                <div className='button edit-mode-button'
+                        onClick={() => this.setState({isEditingEnabled: !isEditingEnabled})}>
                     Toggle Editing
                 </div>
 
