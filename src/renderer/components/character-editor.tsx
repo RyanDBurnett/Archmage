@@ -10,7 +10,18 @@ interface ICharacterEditorProps {
 @observer export class CharacterEditor extends React.Component<ICharacterEditorProps> {
     public render() {
         return (
-            <CharacterProfileCard profile={this.props.store.profile} />
+            <React.Fragment>
+                <div className='button save-button'
+                        onClick={() => this.props.store.saveCharacter()}>
+                    Save Character
+                </div>
+
+                <div className='button load-button'
+                        onClick={() => this.props.store.loadCharacter()}>
+                    Load Character
+                </div>
+                <CharacterProfileCard profile={this.props.store.profile} />
+            </React.Fragment>
         );
     }
 };
