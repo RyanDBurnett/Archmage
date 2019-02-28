@@ -4,21 +4,21 @@ import * as fs from 'fs';
 
 import { observable } from 'mobx';
 import Profile from './profile/profile';
-import Attributes from './attributes/attributes';
+import AbilityScores from './ability-scores/ability-scores';
 
 export default class Store {
     @observable profile: Profile;
-    @observable attributes: Attributes;
+    @observable AbilityScores: AbilityScores;
 
     constructor() {
         this.profile = new Profile();
-        this.attributes = new Attributes();
+        this.AbilityScores = new AbilityScores();
     }
 
     saveCharacter() {
         const characterData = {
             profile: this.profile,
-            attributes: this.attributes
+            AbilityScores: this.AbilityScores
         };
 
         fs.writeFile(
@@ -35,6 +35,6 @@ export default class Store {
         const loadedData = fs.readFileSync('./saves/character.json');
         const parsedData = JSON.parse(loadedData.toString());
         this.profile = parsedData.profile;
-        this.attributes = parsedData.attributes;
+        this.AbilityScores = parsedData.AbilityScores;
     }
 }

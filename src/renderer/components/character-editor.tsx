@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { CharacterProfileCard } from './character-profile/character-profile-card';
-import { AttributesCard } from './attributes/attributes-card';
+import { AbilityScoresCard } from './ability-scores/ability-scores-card';
 import Store from '@controllers/store';
 
 interface ICharacterEditorProps {
@@ -22,7 +22,7 @@ interface ICharacterEditorProps {
                     Load Character
                 </div>
                 <CharacterProfileCard profile={this.props.store.profile} />
-                <AttributesCard attributes={this.props.store.attributes} />
+                <AbilityScoresCard abilityScores={this.props.store.AbilityScores} />
             </React.Fragment>
         );
     }

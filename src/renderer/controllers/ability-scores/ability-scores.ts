@@ -3,7 +3,7 @@
 
 import { observable, action } from 'mobx';
 
-export enum AttributeNames {
+export enum AbilityScoreNames {
     STR = 'strength',
     DEX = 'dexterity',
     CON = 'constitution',
@@ -12,20 +12,20 @@ export enum AttributeNames {
     CHA = 'charisma'
 }
 
-export interface IAttribute {
+export interface IAbilityScore {
     value: number,
     // Bonus = value - 10 / 2, round down to integer (towards negative, not towards 0)
-    // This is enforced via the 'set attribute' function below.
+    // This is enforced via the 'set AbilityScore' function below.
     bonus: number
 } 
 
-export default class Attributes {
-    @observable strength: IAttribute
-    @observable dexterity: IAttribute
-    @observable constitution: IAttribute
-    @observable intelligence: IAttribute
-    @observable wisdom: IAttribute
-    @observable charisma: IAttribute
+export default class AbilityScores {
+    @observable strength: IAbilityScore
+    @observable dexterity: IAbilityScore
+    @observable constitution: IAbilityScore
+    @observable intelligence: IAbilityScore
+    @observable wisdom: IAbilityScore
+    @observable charisma: IAbilityScore
 
     constructor() {
         this.strength = {
@@ -59,8 +59,8 @@ export default class Attributes {
         }
     }
 
-    @action setAttribute(attributeName: AttributeNames, value: number) {
-        this[attributeName] = {
+    @action setAbilityScore(abilityScore: AbilityScoreNames, value: number) {
+        this[abilityScore] = {
             value,
             bonus: Math.floor((value - 10) / 2)
         }
