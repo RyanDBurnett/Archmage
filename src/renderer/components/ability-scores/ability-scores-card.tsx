@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import '../generics/cards.scss';
-import AbilityScores, {AbilityScoreNames} from '@controllers/ability-scores/ability-scores';
+import AbilityScores, {AbilityScoreNames as AS} from '@controllers/ability-scores/ability-scores';
 
 interface IAbilityScoresCardProps {
     abilityScores: AbilityScores
@@ -31,12 +31,12 @@ interface IAbilityScoresCardState {
                     Toggle Editing
                 </div>
 
-                {Object.keys(AbilityScoreNames).map((ability) => {
+                {Object.keys(AS).map((ability) => {
                     return (
                         <div key={ability}>
                             <span>{ability}</span>
-                            <span>{abilityScores[AbilityScoreNames[ability as keyof typeof AbilityScoreNames]].value}</span>
-                            <span>{abilityScores[AbilityScoreNames[ability as keyof typeof AbilityScoreNames]].bonus}</span>
+                            <span>{abilityScores.getValue(AS[ability as AS])}</span>
+                            <span>{abilityScores.getBonus(ability as AS)}</span>
                         </div>
                     );
                 }) }

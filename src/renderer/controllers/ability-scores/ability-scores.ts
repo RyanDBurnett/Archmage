@@ -4,12 +4,14 @@
 import { observable, action } from 'mobx';
 
 export enum AbilityScoreNames {
-    STR = 'strength',
-    DEX = 'dexterity',
-    CON = 'constitution',
-    INT = 'intelligence',
-    WIS = 'wisdom',
-    CHA = 'charisma'
+    // Enum needs to match to the 3 char strings so that we can use
+    // them as object accessors below.
+    STR = 'STR',
+    DEX = 'DEX',
+    CON = 'CON',
+    INT = 'INT',
+    WIS = 'WIS',
+    CHA = 'CHA'
 }
 
 export interface IAbilityScore {
@@ -20,40 +22,41 @@ export interface IAbilityScore {
 } 
 
 export default class AbilityScores {
-    @observable strength: IAbilityScore
-    @observable dexterity: IAbilityScore
-    @observable constitution: IAbilityScore
-    @observable intelligence: IAbilityScore
-    @observable wisdom: IAbilityScore
-    @observable charisma: IAbilityScore
+    [index: string] : any;
+    @observable STR: IAbilityScore
+    @observable DEX: IAbilityScore
+    @observable CON: IAbilityScore
+    @observable INT: IAbilityScore
+    @observable WIS: IAbilityScore
+    @observable CHA: IAbilityScore
 
     constructor() {
-        this.strength = {
+        this.STR = {
             value: 10,
             bonus: 0
         }
 
-        this.dexterity = {
+        this.DEX = {
             value: 10,
             bonus: 0
         }
 
-        this.constitution = {
+        this.CON = {
             value: 10,
             bonus: 0
         }
 
-        this.intelligence = {
+        this.INT = {
             value: 10,
             bonus: 0
         }
 
-        this.wisdom = {
+        this.WIS = {
             value: 10,
             bonus: 0
         }
 
-        this.charisma = {
+        this.CHA = {
             value: 10,
             bonus: 0
         }
@@ -64,5 +67,13 @@ export default class AbilityScores {
             value,
             bonus: Math.floor((value - 10) / 2)
         }
+    }
+
+    getValue(abilityScore: AbilityScoreNames) {
+        return this[abilityScore].value;
+    }
+
+    getBonus(abilityScore: AbilityScoreNames) {
+        return this[abilityScore].bonus;
     }
   }
