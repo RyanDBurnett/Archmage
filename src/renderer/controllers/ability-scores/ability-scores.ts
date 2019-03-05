@@ -76,4 +76,24 @@ export default class AbilityScores {
     getBonus(abilityScore: AbilityScoreNames) {
         return this[abilityScore].bonus;
     }
+
+    getJsonParsableAbilityScores() {
+        return {
+            str: this.STR.value,
+            dex: this.DEX.value,
+            con: this.CON.value,
+            int: this.INT.value,
+            wis: this.WIS.value,
+            cha: this.CHA.value
+        }
+    }
+
+    loadSavedAbilityScores(scores: any) {
+        this.setAbilityScore(AbilityScoreNames.STR, scores.str);
+        this.setAbilityScore(AbilityScoreNames.DEX, scores.dex);
+        this.setAbilityScore(AbilityScoreNames.CON, scores.con);
+        this.setAbilityScore(AbilityScoreNames.INT, scores.int);
+        this.setAbilityScore(AbilityScoreNames.WIS, scores.wis);
+        this.setAbilityScore(AbilityScoreNames.CHA, scores.cha);
+    }
   }

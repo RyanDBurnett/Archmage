@@ -8,18 +8,20 @@ import AbilityScores from './ability-scores/ability-scores';
 
 export default class Store {
     @observable profile: Profile;
-    @observable AbilityScores: AbilityScores;
+    @observable abilityScores: AbilityScores;
 
     constructor() {
         this.profile = new Profile();
-        this.AbilityScores = new AbilityScores();
+        this.abilityScores = new AbilityScores();
     }
 
     saveCharacter() {
         const characterData = {
             profile: this.profile,
-            AbilityScores: this.AbilityScores
+            abilityScores: this.abilityScores.getJsonParsableAbilityScores()
         };
+
+        console.error(characterData);
 
         fs.writeFile(
             './saves/character.json',
@@ -35,6 +37,6 @@ export default class Store {
         const loadedData = fs.readFileSync('./saves/character.json');
         const parsedData = JSON.parse(loadedData.toString());
         this.profile = parsedData.profile;
-        this.AbilityScores = parsedData.AbilityScores;
+        this.abilityScores.loadSavedAbilityScores(parsedData.abilityScores);
     }
 }

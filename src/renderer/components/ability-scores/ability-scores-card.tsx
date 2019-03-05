@@ -33,12 +33,32 @@ interface IAbilityScoresCardState {
 
                 {Object.keys(AS).map((ability) => {
                     return (
-                        <div key={ability}>
-                            <span>{ability}</span>
-                            <span>{abilityScores.getValue(AS[ability as AS])}</span>
-                            <span>{abilityScores.getBonus(ability as AS)}</span>
+                        <div className='card__data' key={ability}>
+                            {this.state.isEditingEnabled ? 
+                                <React.Fragment>
+                                    <span className='card__field'>{ability}</span>
+                                    <span className='card__data'>{abilityScores.getValue(ability as AS)}</span>
+                                    <span className='card__data'>{abilityScores.getBonus(ability as AS)}</span>
+                                    <button
+                                        className='card__button card__decrement'
+                                        onClick={() => abilityScores.setAbilityScore(ability as AS, abilityScores.getValue(ability as AS) - 1)}>
+                                        -
+                                    </button>
+                                    <button
+                                        className='card__button card__decrement'
+                                        onClick={() => abilityScores.setAbilityScore(ability as AS, abilityScores.getValue(ability as AS) + 1)}>
+                                        +
+                                    </button>
+                                </React.Fragment>
+                                :
+                                <React.Fragment>
+                                    <span className='card__field'>{ability}</span>
+                                    <span className='card__data'>{abilityScores.getValue(ability as AS)}</span>
+                                    <span className='card__data'>{abilityScores.getBonus(ability as AS)}</span>
+                                </React.Fragment>
+                            }
                         </div>
-                    );
+                    )
                 }) }
             </div>
             

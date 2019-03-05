@@ -22,7 +22,7 @@ interface ICharacterEditorProps {
                     Load Character
                 </div>
                 <CharacterProfileCard profile={this.props.store.profile} />
-                <AbilityScoresCard abilityScores={this.props.store.AbilityScores} />
+                <AbilityScoresCard abilityScores={this.props.store.abilityScores} />
             </React.Fragment>
         );
     }
