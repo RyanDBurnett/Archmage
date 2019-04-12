@@ -5,6 +5,8 @@ import { CardRow } from '../generics/card-row';
 import Profile from '@controllers/profile/profile';
 import AbilityScores, {AbilityScoreNames as AS} from '@controllers/ability-scores/ability-scores';
 
+import './overview.scss';
+
 interface IOverviewCardProps {
     profile: Profile,
     abilityScores: AbilityScores
@@ -56,9 +58,12 @@ interface IOverviewCardProps {
                 {Object.keys(AS).map((ability) => {
                     return (
                         <React.Fragment key={ability}>
-                            <span className='card__field'>{ability}</span>
-                            <span className='card__data'>{abilityScores.getValue(ability as AS)}</span>
-                            <span className='card__data'>{abilityScores.getBonus(ability as AS)}</span>
+                            <div className='ability-score'>
+                                <span className='card__field'>{ability}</span>
+                                <span className='card__data'>{abilityScores.getValue(ability as AS)}</span>
+                                <span className='card__data'>{abilityScores.getBonus(ability as AS)}</span>
+                            </div>
+
                         </React.Fragment>
                     )
                 })}
