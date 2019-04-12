@@ -1,5 +1,5 @@
 export enum EditorViews {
     Overview = 'Overview',
     AbilityScores = 'Ability Scores',
-    Profile = 'Profiles'
+    Profile = 'Profile'
 }

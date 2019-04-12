@@ -1,5 +1,14 @@
 $NAV_BAR_BACKGROUND: #CCCCCC;
 $NAV_RIBBON_HEIGHT: 40px;
+$NAV_RIBBON_WIDTH: 80px;
+$NAV_RIBBON_INSET: $NAV_RIBBON_HEIGHT / 2;
+
+$OVERVIEW_COLOR: #D67474;
+$ABILITY_SCORES_COLOR: #74D674;
+$PROFILE_COLOR: #7474D6;
+
+$SAVE_COLOR: #D6D674;
+$LOAD_COLOR: #007474;
 
 .app {
     position: absolute;
@@ -13,7 +22,7 @@ $NAV_RIBBON_HEIGHT: 40px;
 }
 
 .nav-bar {
-    width: 100px;
+    width: 100%;
     background-color: #CCCCCC;
     display: flex;
     flex-direction: column;
@@ -22,12 +31,10 @@ $NAV_RIBBON_HEIGHT: 40px;
     &__ribbon {
         position: relative;
         // Text centering
-        display: flex;
-        align-items: center;
-        justify-content: center;
+
 
         height: $NAV_RIBBON_HEIGHT;
-        padding-left: ($NAV_RIBBON_HEIGHT / 2);
+        padding-left: $NAV_RIBBON_INSET;
         margin: 10px 0;
         text-align: center;
 
@@ -38,28 +45,57 @@ $NAV_RIBBON_HEIGHT: 40px;
             left: 0;
             width: 0;
             content: '';
+            border-left: $NAV_RIBBON_INSET solid #CCCCCC;
         }
 
-        &:nth-child(odd) {
+        &.Profile {
+            background-color: $PROFILE_COLOR;
+
             &::before {
-                border-top: ($NAV_RIBBON_HEIGHT / 2) solid rgb(116, 116, 214);
-                border-bottom: ($NAV_RIBBON_HEIGHT / 2) solid rgb(116, 116, 214);
-                border-left: ($NAV_RIBBON_HEIGHT / 2) solid #CCCCCC;
-                background-color: rgb(116, 116, 214);
+                border-top: $NAV_RIBBON_INSET solid $PROFILE_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $PROFILE_COLOR;
+                background-color: $PROFILE_COLOR;
             }
-            
-            background-color: rgb(116, 116, 214);
         }
 
-        &:nth-child(even) {
+        &.AbilityScores {
+            background-color: $ABILITY_SCORES_COLOR;
+
             &::before {
-                border-top: ($NAV_RIBBON_HEIGHT / 2) solid rgb(214, 116, 116);
-                border-bottom: ($NAV_RIBBON_HEIGHT / 2) solid rgb(214, 116, 116);
-                border-left: ($NAV_RIBBON_HEIGHT / 2) solid #CCCCCC;
-                background-color: rgb(214, 116, 116);
+                border-top: $NAV_RIBBON_INSET solid $ABILITY_SCORES_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $ABILITY_SCORES_COLOR;
+                background-color: $ABILITY_SCORES_COLOR;
             }
-            
-            background-color: rgb(214, 116, 116);
+        }
+
+        &.Overview {
+            background-color: $OVERVIEW_COLOR;
+
+            &::before {
+                border-top: $NAV_RIBBON_INSET solid $OVERVIEW_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $OVERVIEW_COLOR;
+                background-color: $OVERVIEW_COLOR;
+            }
+        }
+
+        &.save-button {
+            background-color: $SAVE_COLOR;
+
+            &::before {
+                border-top: $NAV_RIBBON_INSET solid $SAVE_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $SAVE_COLOR;
+                background-color: $SAVE_COLOR;
+            }
+        }
+
+        &.load-button {
+            background-color: $LOAD_COLOR;
+
+            &::before {
+                border-top: $NAV_RIBBON_INSET solid $LOAD_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $LOAD_COLOR;
+                background-color: $LOAD_COLOR;
+            }
         }
 
         &:first-child {
@@ -69,5 +105,41 @@ $NAV_RIBBON_HEIGHT: 40px;
         &:last-child {
             margin-bottom: 0;
         }
+
+        &-label {
+            position: absolute;
+            left: $NAV_RIBBON_HEIGHT / 2;
+            top: 0;
+            bottom: 0;
+            width: $NAV_RIBBON_WIDTH;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-title {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: $NAV_RIBBON_WIDTH + $NAV_RIBBON_INSET;
+            right: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 150%;
+        }
     }
+}
+
+
+.editor {
+    position: absolute;
+    top: $NAV_RIBBON_HEIGHT;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - (#{$NAV_RIBBON_WIDTH} + #{$NAV_RIBBON_INSET}));
+    background-color: white;
+    z-index: 2;
 }

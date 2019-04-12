@@ -3,7 +3,9 @@ import * as React from 'react';
 import { CharacterProfileCard } from '../components/character-profile/character-profile-card';
 import { AbilityScoresCard } from '../components/ability-scores/ability-scores-card';
 import Store from '@controllers/store';
-import {EditorViews} from '../../shared/consts';
+import {EditorViews, ViewColors} from '../../shared/consts';
+
+import * as FlipMove from 'react-flip-move';
 
 import './character-editor.scss';
 
@@ -41,28 +43,58 @@ interface ICharacterEditorState {
         return (
             <React.Fragment>
                 <div className='nav-bar__pages'>
-                    {Object.keys(EditorViews).map((view) => {
-                        return (
-                            <div
-                                    key={view}
-                                    className='nav-bar__ribbon'
-                                    id={view}
-                                    onClick={() => this.props.store.changeView(EditorViews[view as keyof typeof EditorViews])}>
-                                {EditorViews[view as keyof typeof EditorViews]}
-                            </div>
-                        )
-                    })}
+                    <FlipMove>
+                        {Object.keys(EditorViews)
+                            .sort((first, second) => {
+                                if ((EditorViews[first as keyof typeof EditorViews]) !== this.props.store.currentEditorView) {
+                                    return 1;
+                                } else if ((EditorViews[second as keyof typeof EditorViews]) !== this.props.store.currentEditorView) {
+                                    return -1;
+                                } else {
+                                    return 0;
+                                }
+                            })
+                            .map((view) => {
+                                const isCurrentView = ((EditorViews[view as keyof typeof EditorViews]) === this.props.store.currentEditorView)
+                                return (
+                                    <div
+                                        key={view}
+                                        className={'nav-bar__ribbon ' + view.toString()}
+                                        id={view}
+                                        onClick={isCurrentView 
+                                            ? () => {} 
+                                            : () => this.props.store.changeView(EditorViews[view as keyof typeof EditorViews])
+                                        }>
+                                            <span className='nav-bar__ribbon-label'>
+                                                {EditorViews[view as keyof typeof EditorViews]}
+                                            </span>
+
+                                            <span className='nav-bar__ribbon-title'>
+                                                {EditorViews[view as keyof typeof EditorViews]}
+                                            </span>
+                                            
+                                    </div>
+                                )
+                            }
+                        )}
+                    </FlipMove>
                 </div>
 
                 <div className='nav-bar__controls'>
                     <div className='nav-bar__ribbon save-button'
-                            onClick={() => this.props.store.saveCharacter()}>
-                        Save Character
+                        onClick={() => this.props.store.saveCharacter()}
+                    >
+                        <span className='nav-bar__ribbon-label'>
+                            Save Character
+                        </span>
                     </div>
 
                     <div className='nav-bar__ribbon load-button'
-                            onClick={() => this.props.store.loadCharacter()}>
-                        Load Character
+                        onClick={() => this.props.store.loadCharacter()}
+                    >
+                        <span className='nav-bar__ribbon-label'>
+                            Load Character
+                        </span>
                     </div>
 
                     {/* <div className={'nav-bar__ribbon ' + (this.state.isNavRibbonExpanded ? 'retract-button' : 'expand-button')}
@@ -75,13 +107,20 @@ interface ICharacterEditorState {
     }
 
     private renderCurrentCard() {
+        let pageContent = null;
         switch (this.props.store.currentEditorView){
             case EditorViews.AbilityScores:
-                return <AbilityScoresCard abilityScores={this.props.store.abilityScores} />
+                pageContent = <AbilityScoresCard abilityScores={this.props.store.abilityScores} />
+                break;
             case EditorViews.Profile:
-                return <CharacterProfileCard profile={this.props.store.profile} />
-            default:
-                return null;
+                pageContent = <CharacterProfileCard profile={this.props.store.profile} />
+                break;
         }
+
+        return (
+            <React.Fragment>
+                {pageContent}
+            </React.Fragment>
+        );
     }
 };
