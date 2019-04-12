@@ -1,18 +1,25 @@
 // import * as C from '@shared/const';
 // import * as D from '@shared/debug';
 import * as fs from 'fs';
+import {EditorViews} from '../shared/consts';
 
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import Profile from './profile/profile';
 import AbilityScores from './ability-scores/ability-scores';
 
 export default class Store {
     @observable profile: Profile;
     @observable abilityScores: AbilityScores;
+    @observable currentEditorView: EditorViews;
 
     constructor() {
         this.profile = new Profile();
         this.abilityScores = new AbilityScores();
+        this.currentEditorView = EditorViews.Profile; 
+    }
+
+    @action changeView(newView: EditorViews) {
+        this.currentEditorView = newView;
     }
 
     saveCharacter() {

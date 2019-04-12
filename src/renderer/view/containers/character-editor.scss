@@ -1,0 +1,73 @@
+$NAV_BAR_BACKGROUND: #CCCCCC;
+$NAV_RIBBON_HEIGHT: 40px;
+
+.app {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.nav-bar {
+    width: 100px;
+    background-color: #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__ribbon {
+        position: relative;
+        // Text centering
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: $NAV_RIBBON_HEIGHT;
+        padding-left: ($NAV_RIBBON_HEIGHT / 2);
+        margin: 10px 0;
+        text-align: center;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            content: '';
+        }
+
+        &:nth-child(odd) {
+            &::before {
+                border-top: ($NAV_RIBBON_HEIGHT / 2) solid rgb(116, 116, 214);
+                border-bottom: ($NAV_RIBBON_HEIGHT / 2) solid rgb(116, 116, 214);
+                border-left: ($NAV_RIBBON_HEIGHT / 2) solid #CCCCCC;
+                background-color: rgb(116, 116, 214);
+            }
+            
+            background-color: rgb(116, 116, 214);
+        }
+
+        &:nth-child(even) {
+            &::before {
+                border-top: ($NAV_RIBBON_HEIGHT / 2) solid rgb(214, 116, 116);
+                border-bottom: ($NAV_RIBBON_HEIGHT / 2) solid rgb(214, 116, 116);
+                border-left: ($NAV_RIBBON_HEIGHT / 2) solid #CCCCCC;
+                background-color: rgb(214, 116, 116);
+            }
+            
+            background-color: rgb(214, 116, 116);
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
