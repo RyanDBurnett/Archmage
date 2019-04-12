@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { configure } from 'mobx';
 
 import './App.scss';
-import { CharacterEditor } from '@components/character-editor';
+import { CharacterEditor } from 'view/containers/character-editor';
 
 export interface AppProps {
     store: Store;
@@ -22,7 +22,7 @@ const App = observer(
             });
 
             return (
-                <div className='App'>
+                <div>
                     <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"></link>
                     <CharacterEditor store={this.props.store} />
                 </div>
