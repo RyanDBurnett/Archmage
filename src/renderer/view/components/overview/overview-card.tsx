@@ -3,49 +3,65 @@ import * as React from 'react';
 import '../generics/cards.scss';
 import { CardRow } from '../generics/card-row';
 import Profile from '@controllers/profile/profile';
+import AbilityScores, {AbilityScoreNames as AS} from '@controllers/ability-scores/ability-scores';
 
-interface ICharacterProfileCardProps {
-    profile: Profile
+interface IOverviewCardProps {
+    profile: Profile,
+    abilityScores: AbilityScores
 }
 
-@observer export class CharacterProfileCard extends React.Component<ICharacterProfileCardProps, any> {
-    constructor(props: ICharacterProfileCardProps) {
+@observer export class OverviewCard extends React.Component<IOverviewCardProps, any> {
+    constructor(props: IOverviewCardProps) {
         super(props);
     }
 
     public render() {
-        const {profile} = this.props;
+        const {profile, abilityScores} = this.props;
         return (
             <React.Fragment>
+                <h1>Profile</h1>
+
                 <CardRow
                     label='Name'
                     value={profile.name}
                     changeHandler={(e) => profile.setName(e)}
-                    isEditable={true} />
+                    isEditable={false} />
 
                 <CardRow
                     label='Gender'
                     value={profile.gender}
                     changeHandler={(e) => profile.setGender(e)}
-                    isEditable={true} />
+                    isEditable={false} />
 
                 <CardRow
                     label='Height'
                     value={profile.height}
                     changeHandler={(e) => profile.setHeight(e)}
-                    isEditable={true} />
+                    isEditable={false} />
 
                 <CardRow
                     label='Weight'
                     value={profile.weight}
                     changeHandler={(e) => profile.setWeight(e)}
-                    isEditable={true} />
+                    isEditable={false} />
 
                 <CardRow
                     label='Age'
                     value={profile.age}
                     changeHandler={(e) => profile.setAge(e)}
-                    isEditable={true} />
+                    isEditable={false} />
+
+                <h1>Ability Scores</h1>
+
+                {Object.keys(AS).map((ability) => {
+                    return (
+                        <React.Fragment key={ability}>
+                            <span className='card__field'>{ability}</span>
+                            <span className='card__data'>{abilityScores.getValue(ability as AS)}</span>
+                            <span className='card__data'>{abilityScores.getBonus(ability as AS)}</span>
+                        </React.Fragment>
+                    )
+                })}
             </React.Fragment>
         );
     }

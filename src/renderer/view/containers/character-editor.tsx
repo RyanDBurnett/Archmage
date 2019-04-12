@@ -2,6 +2,7 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { CharacterProfileCard } from '../components/character-profile/character-profile-card';
 import { AbilityScoresCard } from '../components/ability-scores/ability-scores-card';
+import { OverviewCard } from '../components/Overview/Overview-card';
 import Store from '@controllers/store';
 import {EditorViews} from '../../shared/consts';
 
@@ -114,6 +115,9 @@ interface ICharacterEditorState {
                 break;
             case EditorViews.Profile:
                 pageContent = <CharacterProfileCard profile={this.props.store.profile} />
+                break;
+            case EditorViews.Overview:
+                pageContent = <OverviewCard profile={this.props.store.profile} abilityScores={this.props.store.abilityScores} />
                 break;
         }
 
