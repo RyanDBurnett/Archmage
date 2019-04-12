@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CharacterProfileCard } from '../components/character-profile/character-profile-card';
 import { AbilityScoresCard } from '../components/ability-scores/ability-scores-card';
 import Store from '@controllers/store';
-import {EditorViews, ViewColors} from '../../shared/consts';
+import {EditorViews} from '../../shared/consts';
 
 import * as FlipMove from 'react-flip-move';
 
