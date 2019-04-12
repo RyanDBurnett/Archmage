@@ -142,4 +142,6 @@ $LOAD_COLOR: #007474;
     width: calc(100% - (#{$NAV_RIBBON_WIDTH} + #{$NAV_RIBBON_INSET}));
     background-color: white;
     z-index: 2;
+
+    padding: 10px;
 }
