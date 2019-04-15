@@ -6,6 +6,7 @@ $NAV_RIBBON_INSET: $NAV_RIBBON_HEIGHT / 2;
 $OVERVIEW_COLOR: #D67474;
 $ABILITY_SCORES_COLOR: #74D674;
 $PROFILE_COLOR: #7474D6;
+$LEVEL_COLOR: #AA3300;
 
 $SAVE_COLOR: #D6D674;
 $LOAD_COLOR: #007474;
@@ -75,6 +76,16 @@ $LOAD_COLOR: #007474;
                 border-top: $NAV_RIBBON_INSET solid $OVERVIEW_COLOR;
                 border-bottom: $NAV_RIBBON_INSET solid $OVERVIEW_COLOR;
                 background-color: $OVERVIEW_COLOR;
+            }
+        }
+
+        &.Levels {
+            background-color: $LEVEL_COLOR;
+
+            &::before {
+                border-top: $NAV_RIBBON_INSET solid $LEVEL_COLOR;
+                border-bottom: $NAV_RIBBON_INSET solid $LEVEL_COLOR;
+                background-color: $LEVEL_COLOR;
             }
         }
 
