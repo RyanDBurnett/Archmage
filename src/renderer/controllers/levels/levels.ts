@@ -3,7 +3,7 @@
 
 import { observable, action } from 'mobx';
 
-const BENEFITS_PER_LEVEL = 6;
+export const BENEFITS_PER_LEVEL = 6;
 const LEVELS_PER_ABILITY_SCORE_INCREASE = 4;
 
 export interface ILevelBenefit {

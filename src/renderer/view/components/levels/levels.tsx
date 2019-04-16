@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import '../generics/cards.scss';
-import Levels, {levelBenefits, ILevelBenefit} from '@controllers/levels/levels';
+import Levels, {levelBenefits, ILevelBenefit, BENEFITS_PER_LEVEL} from '@controllers/levels/levels';
+
+import './levels.scss';
 
 interface ILevelsCardProps {
     levels: Levels
@@ -50,70 +52,128 @@ interface ILevelsCardState {
     public render() {
         return (
             <React.Fragment>
-                Combat
-                <select 
-                    className='level-benefit-selector'
-                    id='level-benefits-combat'
-                    onChange={() => this.updatePendingLevel()}
-                    defaultValue={'0'}
-                >
-                    {levelBenefits.map((benefit, index) => {
-                        return <option value={index} key={index}>{benefit.rankName}</option>
-                    })}
-                </select>
+                <div className='levels__benefits'>
+                    <span
+                        id='level-benefits-combat-label'
+                        className='levels__benefits-label'
+                    >
+                        Combat
+                    </span>
+                    <input
+                        type='range'
+                        id='level-benefits-combat'
+                        className='levels__benefit-selector'
+                        min={0}
+                        max={levelBenefits.length - 1}
+                        onChange={() => this.updatePendingLevel()}
+                        list='level-benefits-combat-labels'
+                        defaultValue='0'
+                    />
+                    <datalist id='level-benefits-combat-labels'>
+                        {levelBenefits.map((benefit, index) => {
+                            return <option key={index} value={index}>{index}</option>
+                        })}
+                    </datalist>
 
-                Magic
-                <select 
-                    className='level-benefit-selector'
-                    id='level-benefits-magic'
-                    onChange={() => this.updatePendingLevel()}
-                    defaultValue={'0'}
-                >
-                    {levelBenefits.map((benefit, index) => {
-                        return <option value={index} key={index}>{benefit.rankName}</option>
-                    })}
-                </select>
+                    <span
+                        id='level-benefits-magic-label'
+                        className='levels__benefits-label'
+                    >
+                        Magic
+                    </span>
+                    <input
+                        type='range'
+                        id='level-benefits-magic'
+                        className='levels__benefit-selector'
+                        min={0}
+                        max={levelBenefits.length - 1}
+                        onChange={() => this.updatePendingLevel()}
+                        list='level-benefits-magic-labels'
+                        defaultValue='0'
+                    />
+                    <datalist id='level-benefits-magic-labels'>
+                        {levelBenefits.map((benefit, index) => {
+                            return <option key={index} value={index}>{index}</option>
+                        })}
+                    </datalist>
 
-                Skills
-                <select 
-                    className='level-benefit-selector'
-                    id='level-benefits-skills'
-                    onChange={() => this.updatePendingLevel()}
-                    defaultValue={'0'}
-                >
-                    {levelBenefits.map((benefit, index) => {
-                        return <option value={index} key={index}>{benefit.rankName}</option>
-                    })}
-                </select>
+                    <span
+                        id='level-benefits-skills-label'
+                        className='levels__benefits-label'
+                    >
+                        Skills
+                    </span>
+                    <input
+                        type='range'
+                        id='level-benefits-skills'
+                        className='levels__benefit-selector'
+                        min={0}
+                        max={levelBenefits.length - 1}
+                        onChange={() => this.updatePendingLevel()}
+                        list='level-benefits-skills-labels'
+                        defaultValue='0'
+                    />
+                    <datalist id='level-benefits-skills-labels'>
+                        {levelBenefits.map((benefit, index) => {
+                            return <option key={index} value={index}>{index}</option>
+                        })}
+                    </datalist>
 
-                <div>
-                    Current Benefits:
-                    <div>
-                        BAB: {this.state.pendingLevel.combatBenefits.bonusIncrease}
+                    <div 
+                        className={'levels__benefits-cost '
+                            + (this.state.pendingLevel.totalCost > BENEFITS_PER_LEVEL ? 'levels__benefits-cost--error' : '')}
+                    >
+                        Points Spent: {this.state.pendingLevel.totalCost} / {BENEFITS_PER_LEVEL}
                     </div>
-                    <div>
-                        Combat Talents: {this.state.pendingLevel.combatBenefits.talents}
-                    </div>
-                    <div>
-                        BMB: {this.state.pendingLevel.magicBenefits.bonusIncrease}
-                    </div>
-                    <div>
-                        Magic Talents: {this.state.pendingLevel.magicBenefits.bonusIncrease}
-                    </div>
-                    <div>
-                        Skill Ranks: {this.state.pendingLevel.skillBenefits.skillRanks}
-                    </div>
-                    <div>
-                        Skill Talents: {this.state.pendingLevel.skillBenefits.talents}
-                    </div>
-                    <div>
-                        Points Spent: {this.state.pendingLevel.totalCost}
-                    </div>
-
-                    <button className={'level__add-button ' + ((this.state.pendingLevel.totalCost === 6) ? '' : 'level__add-button--error')}>
-                        Add Level
-                    </button>
                 </div>
+
+                <div className='levels__results'>
+                    <span className='levels__results-label'>BAB:</span>
+                    <span className='levels__results-current'>{this.props.levels.bab}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.combatBenefits.bonusIncrease}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.bab + this.state.pendingLevel.combatBenefits.bonusIncrease}</span>
+                    
+                    <span className='levels__results-label'>Combat Talents:</span>
+                    <span className='levels__results-current'>{this.props.levels.combatTalents}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.combatBenefits.talents}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.combatTalents + this.state.pendingLevel.combatBenefits.talents}</span>
+                    
+                    <span className='levels__results-label'>BMB:</span>
+                    <span className='levels__results-current'>{this.props.levels.bmb}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.magicBenefits.bonusIncrease}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.bab + this.state.pendingLevel.magicBenefits.bonusIncrease}</span>
+                    
+                    <span className='levels__results-label'>Magic Talents:</span>
+                    <span className='levels__results-current'>{this.props.levels.magicTalents}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.magicBenefits.talents}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.magicTalents + this.state.pendingLevel.magicBenefits.talents}</span>
+
+                    <span className='levels__results-label'>Skill Ranks:</span>
+                    <span className='levels__results-current'>{this.props.levels.skillRanks}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.skillBenefits.skillRanks}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.skillRanks + this.state.pendingLevel.skillBenefits.skillRanks}</span>
+
+                    <span className='levels__results-label'>Skill Talents:</span>
+                    <span className='levels__results-current'>{this.props.levels.skillTalents}</span>
+                    <span className='levels__results-plus'>+</span>
+                    <span className='levels__results-new'>{this.state.pendingLevel.skillBenefits.talents}</span>
+                    <span className='levels__results-arrow'>=></span>
+                    <span className='levels__results-total'>{this.props.levels.combatTalents + this.state.pendingLevel.skillBenefits.talents}</span>                    
+                </div>
+
+                <button className={'levels__add-button ' + ((this.state.pendingLevel.totalCost === 6) ? '' : 'level__add-button--error')}>
+                    Add Level
+                </button>
             </React.Fragment>
         );
     }
