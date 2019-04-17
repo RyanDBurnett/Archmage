@@ -9,6 +9,7 @@ import {EditorViews} from '../../shared/consts';
 import * as FlipMove from 'react-flip-move';
 
 import './character-editor.scss';
+import { LevelsCard } from 'view/components/levels/levels';
 
 interface ICharacterEditorProps {
     store: Store
@@ -118,6 +119,9 @@ interface ICharacterEditorState {
                 break;
             case EditorViews.Overview:
                 pageContent = <OverviewCard profile={this.props.store.profile} abilityScores={this.props.store.abilityScores} />
+                break;
+            case EditorViews.Levels:
+                pageContent = <LevelsCard levels={this.props.store.levels} />
                 break;
         }
 

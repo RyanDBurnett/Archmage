@@ -1,0 +1,135 @@
+$BENEFITS_GUTTER_WIDTH: 20px;
+$BENEFITS_COLUMN_SEPARATOR_WIDTH: 20px;
+$BENEFITS_COLUMN_WIDTH: 60px;
+
+$BENEFITS_ROW_SEPARATOR_WIDTH: 10px;
+
+$RESULTS_GUTTER_WIDTH: 30px;
+$RESULTS_COLUMN_WIDTH: 10px;
+$RESULTS_COLUMN_SEPARATOR_WIDTH: 20px;
+
+
+.levels {
+    &__benefits {
+        // Horizontally center the benefit selectors inside the editor pane.
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        // Set up grids for the benefit selectors and labels
+        // Inline-part of inline-grid necessary for horizontal centering
+        display: inline-grid;
+        grid-template-columns:
+            [left-gutter] $BENEFITS_GUTTER_WIDTH
+            [combat] $BENEFITS_COLUMN_WIDTH
+            [magic] $BENEFITS_COLUMN_WIDTH
+            [skills] $BENEFITS_COLUMN_WIDTH
+            [right-gutter] $BENEFITS_GUTTER_WIDTH;
+
+        grid-template-rows:
+            [head-gutter] $BENEFITS_GUTTER_WIDTH
+            [labels] 20px
+            [selectors] 100px
+            [cost] 20px;
+        
+        grid-column-gap: $BENEFITS_COLUMN_SEPARATOR_WIDTH;
+        grid-row-gap: $BENEFITS_ROW_SEPARATOR_WIDTH;
+    }
+
+    &__benefits-label {
+        text-align: center;
+    }
+
+    &__benefit-selector {
+        writing-mode: bt-lr; /* IE */
+        -webkit-appearance: slider-vertical; /* WebKit */
+    }
+
+    &__benefits-cost {
+        grid-row: cost;
+        grid-column: combat / skills;
+
+        &--error {
+            color: red;
+        }
+    }
+
+    &__results {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        margin-top: $BENEFITS_GUTTER_WIDTH;
+
+        display: inline-grid;
+        grid-template-columns: 
+            [left-gutter] $RESULTS_GUTTER_WIDTH
+            [labels] 120px
+            [current] $RESULTS_COLUMN_WIDTH
+            [plus] $RESULTS_COLUMN_WIDTH
+            [new] $RESULTS_COLUMN_WIDTH
+            [arrow] $RESULTS_COLUMN_WIDTH
+            [total] $RESULTS_COLUMN_WIDTH
+            [right-gutter] $RESULTS_GUTTER_WIDTH;
+        
+        grid-gap: $RESULTS_COLUMN_SEPARATOR_WIDTH;
+        
+        &-label {
+            grid-column: labels;
+        }
+
+        &-plus {
+            grid-column: plus;
+        }
+
+        &-current {
+            grid-column: current;
+        }
+
+        &-new {
+            grid-column: new;
+        }
+
+        &-arrow {
+            grid-column: arrow;
+        }
+
+        &-total {
+            grid-column: total;
+        }
+    }
+
+    &__add-button {
+        display: block;
+    }
+}
+
+#level-benefits-combat-label {
+    grid-column: combat;
+    grid-row: labels;
+}
+
+#level-benefits-combat {
+    grid-column: combat;
+    grid-row: selectors;
+}
+
+#level-benefits-magic-label {
+    grid-column: magic;
+    grid-row: labels;
+}
+
+#level-benefits-magic {
+    grid-column: magic;
+    grid-row: selectors;
+}
+
+#level-benefits-skills-label {
+    grid-column: skills;
+    grid-row: labels;
+}
+
+#level-benefits-skills {
+    grid-column: skills;
+    grid-row: selectors;
+}
