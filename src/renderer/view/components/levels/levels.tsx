@@ -49,6 +49,17 @@ interface ILevelsCardState {
         }})
     }
 
+    levelUp() {
+        // @ts-ignore
+        const currentCombatLevelIndex = document.getElementById('level-benefits-combat').value;
+        // @ts-ignore
+        const currentMagicLevelIndex = document.getElementById('level-benefits-magic').value;
+        // @ts-ignore
+        const currentSkillLevelIndex = document.getElementById('level-benefits-skills').value;
+
+        this.props.levels.levelUp(currentCombatLevelIndex, currentMagicLevelIndex, currentSkillLevelIndex);
+    }
+
     public render() {
         return (
             <React.Fragment>
@@ -171,9 +182,22 @@ interface ILevelsCardState {
                     <span className='levels__results-total'>{this.props.levels.combatTalents + this.state.pendingLevel.skillBenefits.talents}</span>                    
                 </div>
 
-                <button className={'levels__add-button ' + ((this.state.pendingLevel.totalCost === 6) ? '' : 'level__add-button--error')}>
+                <button
+                    className={'levels__add-button ' + ((this.state.pendingLevel.totalCost === BENEFITS_PER_LEVEL) ? '' : 'level__add-button--error')}
+                    onClick={() => {this.state.pendingLevel.totalCost === BENEFITS_PER_LEVEL && this.levelUp()}}
+                >
                     Add Level
                 </button>
+
+                <div className='levels__history'>
+                    {this.props.levels.levels.map((level, index) => {
+                        return (
+                            <div className='levels__past-level' key={index}>
+                            Level {index + 1}: {level.combatIndex}, {level.magicIndex}, {level.skillIndex}
+                            </div>
+                        )
+                    })}
+                </div>
             </React.Fragment>
         );
     }
