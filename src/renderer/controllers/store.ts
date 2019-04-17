@@ -28,7 +28,9 @@ export default class Store {
     saveCharacter() {
         const characterData = {
             profile: this.profile,
-            abilityScores: this.abilityScores.getJsonParsableAbilityScores()
+            abilityScores: this.abilityScores.getJsonParsableAbilityScores(),
+            levels: this.levels.levels
+
         };
 
         console.error(characterData);
@@ -48,5 +50,6 @@ export default class Store {
         const parsedData = JSON.parse(loadedData.toString());
         this.profile = parsedData.profile;
         this.abilityScores.loadSavedAbilityScores(parsedData.abilityScores);
+        this.levels.loadSavedLevels(parsedData.levels);
     }
 }

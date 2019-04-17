@@ -116,31 +116,27 @@ export default class Levels {
         this.currentLevel = this.levels.length;
     }
 
-    // getValue(abilityScore: AbilityScoreNames) {
-    //     return this[abilityScore].value;
-    // }
+    getJsonParsableLevels() {
+        return this.levels.map((level) => {
+            level.combatIndex,
+            level.magicIndex,
+            level.skillIndex
+        })
+    }
 
-    // getBonus(abilityScore: AbilityScoreNames) {
-    //     return this[abilityScore].bonus;
-    // }
+    loadSavedLevels(levels: any) {
+        // Clear out any current info.
+        this.currentLevel = 0;
+        this.levels = [];
+        this.bab = 0;
+        this.bmb = 0;
+        this.skillRanks = 0;
+        this.combatTalents = 0;
+        this.magicTalents = 0;
+        this.skillTalents = 0;
+        this.statIncreases = 0;
 
-    // getJsonParsableAbilityScores() {
-    //     return {
-    //         str: this.STR.value,
-    //         dex: this.DEX.value,
-    //         con: this.CON.value,
-    //         int: this.INT.value,
-    //         wis: this.WIS.value,
-    //         cha: this.CHA.value
-    //     }
-    // }
-
-    // loadSavedAbilityScores(scores: any) {
-    //     this.setAbilityScore(AbilityScoreNames.STR, scores.str);
-    //     this.setAbilityScore(AbilityScoreNames.DEX, scores.dex);
-    //     this.setAbilityScore(AbilityScoreNames.CON, scores.con);
-    //     this.setAbilityScore(AbilityScoreNames.INT, scores.int);
-    //     this.setAbilityScore(AbilityScoreNames.WIS, scores.wis);
-    //     this.setAbilityScore(AbilityScoreNames.CHA, scores.cha);
-    // }
+        // Then load in the 'new' loaded levels.
+        levels.forEach((level: any) => this.levelUp(level.combatIndex, level.magicIndex, level.skillIndex));
+    }
   }
