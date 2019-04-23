@@ -1,0 +1,9 @@
+{
+    "id": "rage-boundlessExertion",
+    "name": "Boundless Exertion",
+    "prereqs":  [],
+    "stub": "While raging, you can use a bigger hit die in place of multiple smaller dice",
+    "benefits": [
+        "While you have at least one temporary hit point from rage, when you would roll hit dice to activate another ability, you may use 1d12 in place of 2 hit dice."
+    ]
+}

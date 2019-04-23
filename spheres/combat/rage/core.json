@@ -1,0 +1,13 @@
+{
+    "id": "rage",
+    "name": "Rage",
+    "prereqs":  [],
+    "stub": "You can use your anger to give yourself energy in combat, gaining short term resilience and power but quickly exhausting yourself.",
+    "benefits": [
+        "Each round, at the start of your round, you may spend a hit die to gain 3 temporary hit points.  These hit points last until the beginning of your next round.  If you have more than 3 BAB, you gain a number of temporary hit points equal to your BAB instead."
+    ],
+    "notes": [
+        "Temporary hit points granted by rage expire before the decision of whether or not to reactivate rage, so the hit dice used to power rage always comes from your 'real' health.",
+        "You may elect to have damage bypass your rage hit points and instead target your 'real' hit points, which can be helpful to make sure you have at least one rage hit point for maintaining other rage benefits.  However, you may not split damage from a single source--either you take damage to your rage hit points until they are spent (with the remainder rolling over to your real hp), or you completely skip your rage hit points."
+    ]
+}

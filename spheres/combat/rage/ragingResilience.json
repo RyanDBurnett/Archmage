@@ -1,0 +1,9 @@
+{
+    "id": "rage-ragingResilience",
+    "name": "Raging Resilience",
+    "prereqs":  [],
+    "stub": "While raging, you ignore your wounds.",
+    "benefits": [
+        "While you have at least one temporary hit point from rage, you ignore the effects of any non-grievous wounds you are suffering."
+    ]
+}

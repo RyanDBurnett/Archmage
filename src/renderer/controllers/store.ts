@@ -7,18 +7,23 @@ import { observable, action } from 'mobx';
 import Profile from './profile/profile';
 import AbilityScores from './ability-scores/ability-scores';
 import Levels from './levels/levels';
+import SphereParser from './talents/sphere-parser';
+import {ISphereCollection} from './talents/sphere-parser';
 
 export default class Store {
     @observable profile: Profile;
     @observable abilityScores: AbilityScores;
     @observable levels: Levels;
     @observable currentEditorView: EditorViews;
+    @observable spheres: ISphereCollection;
 
     constructor() {
         this.profile = new Profile();
         this.abilityScores = new AbilityScores();
         this.levels = new Levels();
-        this.currentEditorView = EditorViews.Profile; 
+        this.currentEditorView = EditorViews.Profile;
+        const sphereParser = new SphereParser();
+        this.spheres = sphereParser.parseSpheres();
     }
 
     @action changeView(newView: EditorViews) {
