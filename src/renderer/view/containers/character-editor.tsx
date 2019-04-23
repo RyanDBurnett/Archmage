@@ -10,6 +10,7 @@ import * as FlipMove from 'react-flip-move';
 
 import './character-editor.scss';
 import { LevelsCard } from 'view/components/levels/levels';
+import { TalentsCard } from 'view/components/talents/talents';
 
 interface ICharacterEditorProps {
     store: Store
@@ -122,6 +123,9 @@ interface ICharacterEditorState {
                 break;
             case EditorViews.Levels:
                 pageContent = <LevelsCard levels={this.props.store.levels} />
+                break;
+            case EditorViews.Talents:
+                pageContent = <TalentsCard talents={this.props.store.talents} />
                 break;
         }
 

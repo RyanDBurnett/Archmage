@@ -8,14 +8,14 @@ import Profile from './profile/profile';
 import AbilityScores from './ability-scores/ability-scores';
 import Levels from './levels/levels';
 import SphereParser from './talents/sphere-parser';
-import {ISphereCollection} from './talents/sphere-parser';
+import Talents from './talents/talents';
 
 export default class Store {
     @observable profile: Profile;
     @observable abilityScores: AbilityScores;
     @observable levels: Levels;
     @observable currentEditorView: EditorViews;
-    @observable spheres: ISphereCollection;
+    @observable talents: Talents;
 
     constructor() {
         this.profile = new Profile();
@@ -23,7 +23,8 @@ export default class Store {
         this.levels = new Levels();
         this.currentEditorView = EditorViews.Profile;
         const sphereParser = new SphereParser();
-        this.spheres = sphereParser.parseSpheres();
+        const spheres = sphereParser.parseSpheres();
+        this.talents = new Talents(spheres)
     }
 
     @action changeView(newView: EditorViews) {
