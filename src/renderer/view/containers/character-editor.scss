@@ -1,6 +1,6 @@
 $EDITOR_PADDING: 10px;
 
-$NAV_BAR_BACKGROUND: #CCCCCC;
+$NAV_BAR_BACKGROUND: transparent;
 $NAV_RIBBON_HEIGHT: 40px;
 $NAV_RIBBON_WIDTH: 80px;
 $NAV_RIBBON_INSET: $NAV_RIBBON_HEIGHT / 2;
@@ -15,13 +15,10 @@ $SAVE_COLOR: #D6D674;
 $LOAD_COLOR: #007474;
 
 @mixin bookmark-ribbon($bgColor) {
-    background-color: $bgColor;
-
-    &::before {
-        border-top: $NAV_RIBBON_INSET solid $bgColor;
-        border-bottom: $NAV_RIBBON_INSET solid $bgColor;
-        background-color: $bgColor;
-    }
+    background-color: $NAV_BAR_BACKGROUND;
+    border-top: $NAV_RIBBON_INSET solid $bgColor;
+    border-bottom: $NAV_RIBBON_INSET solid $bgColor;
+    border-left: $NAV_RIBBON_INSET solid $NAV_BAR_BACKGROUND;
 }
 
 .app {
@@ -37,7 +34,7 @@ $LOAD_COLOR: #007474;
 
 .nav-bar {
     width: 100%;
-    background-color: #CCCCCC;
+    background-color: $NAV_BAR_BACKGROUND;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -47,19 +44,8 @@ $LOAD_COLOR: #007474;
         // Text centering
 
         height: $NAV_RIBBON_HEIGHT;
-        padding-left: $NAV_RIBBON_INSET;
         margin: 10px 0;
         text-align: center;
-
-        &::before {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            content: '';
-            border-left: $NAV_RIBBON_INSET solid #CCCCCC;
-        }
 
         &.Profile {
             @include bookmark-ribbon($PROFILE_COLOR);
@@ -99,7 +85,7 @@ $LOAD_COLOR: #007474;
 
         &-label {
             position: absolute;
-            left: $NAV_RIBBON_HEIGHT / 2;
+            left: 0;
             top: 0;
             bottom: 0;
             width: $NAV_RIBBON_WIDTH;
