@@ -1,0 +1,11 @@
+{
+    "id": "elemental-blast",
+    "name": "Elemental Blast",
+    "prereqs":  [],
+    "stub": "You can explode people.",
+    "benefits": [
+        "Boom!"
+    ],
+    "notes": [
+    ]
+}

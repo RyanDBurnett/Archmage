@@ -17,48 +17,67 @@ $CATEGORY_RIBBON_WIDTH: $CATEGORY_RIBBON_INSET * 2;
     }
 }
 
-.talents__category {
-    text-align: center;
-    text-transform: capitalize;
-    width: $CATEGORY_RIBBON_WIDTH;
-    min-width: $CATEGORY_RIBBON_WIDTH;
-    height: $CATEGORY_RIBBON_INSET + 20px;
+.talents {
+    &__category {
+        text-align: center;
+        text-transform: capitalize;
+        width: $CATEGORY_RIBBON_WIDTH;
+        min-width: $CATEGORY_RIBBON_WIDTH;
+        height: $CATEGORY_RIBBON_INSET + 20px;
 
-    position: relative;
+        position: relative;
 
-    // Offset for removal of editor padding below, in container.
-    padding-top: $EDITOR_PADDING;
-    padding-bottom: $CATEGORY_RIBBON_INSET;
-    margin: 0 10px;
+        // Offset for removal of editor padding below, in container.
+        padding-top: $EDITOR_PADDING;
+        padding-bottom: $CATEGORY_RIBBON_INSET;
+        margin: 0 10px;
 
-    &::before {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 0;
-        content: '';
-        border-bottom: $CATEGORY_RIBBON_INSET / 2 solid white;
+        &::before {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            content: '';
+            border-bottom: $CATEGORY_RIBBON_INSET / 2 solid white;
+        }
+
+        &--combat {
+            @include bookmark-ribbon($COLOR_COMBAT);
+        }
+
+        &--magic {
+            @include bookmark-ribbon($COLOR_MAGIC);
+        }
+
+        &--skills {
+            @include bookmark-ribbon($COLOR_SKILLS);
+        }
+
+        &-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            // make ribbons touch top of screen
+            margin-top: -1 * $EDITOR_PADDING;
+        }
     }
 
-    &--combat {
-        @include bookmark-ribbon($COLOR_COMBAT);
+    &__sphere {
+        margin: 10px 0;
+        border: 1px solid black;
+        padding: 10px;
+        background-color: #CCCCCC;
+
+        &-name {
+            text-transform: capitalize;
+        }
     }
 
-    &--magic {
-        @include bookmark-ribbon($COLOR_MAGIC);
-    }
-
-    &--skills {
-        @include bookmark-ribbon($COLOR_SKILLS);
-    }
-
-    &-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-
-        // make ribbons touch top of screen
-        margin-top: -1 * $EDITOR_PADDING;
+    &__talent-container {
+        margin-top: 10px;
+        border-top: 1px solid black;
     }
 }
+

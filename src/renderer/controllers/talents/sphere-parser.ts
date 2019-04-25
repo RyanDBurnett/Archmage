@@ -40,16 +40,11 @@ export default class SphereParser {
         };
 
         for(const category in SphereCategories) {
-            fs.readdir('./spheres/' + category, (error, spheresList) => {
-                if (error) {
-                    console.error(error);
-                    throw error;
-                }
+            let spheresList =  fs.readdirSync('./spheres/' + category);
 
-                spheres[category] = spheresList.map((sphereName) => {
-                    return this.parseSphere(sphereName, category)
-                });
-            })
+            spheres[category] = spheresList.map((sphereName) => {
+                return this.parseSphere(sphereName, category)
+            });
         }
 
         return spheres;
@@ -61,34 +56,22 @@ export default class SphereParser {
             talents:<ITalent[]>[]
         };
 
-        fs.readdir('./spheres/' + category + '/' + sphereName,
-            (error, talents) => {
-                if (error) {
-                    console.error(error);
-                }
+        let talents = fs.readdirSync('./spheres/' + category + '/' + sphereName);
 
-                talents.map((talentName) => {
-                    fs.readFile('./spheres/' + category + '/' + sphereName + '/' + talentName,
-                        'utf8',
-                        (err, fileContents) => {
-                            if (err) {
-                                console.error('error reading talent ' + talentName + ' in sphere ' + category + '/' + sphereName + ': ' + err);
-                            }
+        talents.map((talentName) => {
+            let fileContents = fs.readFileSync('./spheres/' + category + '/' + sphereName + '/' + talentName, {encoding: 'utf8'});
 
-                            const rawTalent = JSON.parse(fileContents);
-                            const fullTalent = <ITalent>
-                            {
-                                category,
-                                ...rawTalent
-                            };
 
-                            sphere.talents.push(fullTalent);
-                        }
-                    )
-                })                
-            }
-        )
+            const rawTalent = JSON.parse(fileContents);
+            const fullTalent = <ITalent>
+            {
+                category,
+                ...rawTalent
+            };
 
+            sphere.talents.push(fullTalent);
+        });
+        
         return sphere;
     }
 }

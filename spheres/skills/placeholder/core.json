@@ -1,0 +1,11 @@
+{
+    "id": "skill-thing",
+    "name": "Name goes here",
+    "prereqs":  [],
+    "stub": "You can skills people.",
+    "benefits": [
+        "Whee!"
+    ],
+    "notes": [
+    ]
+}

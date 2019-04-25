@@ -12,7 +12,9 @@ interface ITalentsCardProps {
 }
 
 interface ITalentsCardState {
-    currentCategory: SphereCategories
+    currentCategory: SphereCategories,
+    expandedSpheres: string[],
+    expandedTalents: string[]
 }
 
 @observer export class TalentsCard extends React.Component<ITalentsCardProps, ITalentsCardState> {
@@ -21,8 +23,21 @@ interface ITalentsCardState {
         this.state = {
             // I tried to do 'first', but Enums don't have that.  Regardless, this choice is completely arbitary,
             // there just needs to be *something* here.
-            currentCategory: SphereCategories.combat
+            currentCategory: SphereCategories.combat,
+            expandedSpheres: [],
+            expandedTalents: []
         }
+    }
+
+    toggleSphereDisplay(sphereName: string) {
+        let newSpheres = this.state.expandedSpheres;
+        if (this.state.expandedSpheres.includes(sphereName)) {
+            newSpheres = newSpheres.filter((el) => el !== sphereName);
+        } else {
+            newSpheres.push(sphereName);
+        }
+
+        this.setState({expandedSpheres: newSpheres});
     }
 
     public render() {
@@ -41,6 +56,29 @@ interface ITalentsCardState {
                         );
                     })}
                 </div>
+                
+                {this.props.talents.spheres[this.state.currentCategory] ?
+                    <div className='talents__sphere-container'>
+                        {this.props.talents.spheres[this.state.currentCategory].map((sphere) => {
+                            return (
+                                <div className='talents__sphere' key={sphere.name}>
+                                    <div className='talents__sphere-name' onClick={() => this.toggleSphereDisplay(sphere.name)}>{sphere.name}</div>
+                                    <div className='talents__talent-container' hidden={!this.state.expandedSpheres.includes(sphere.name)}>
+                                        {sphere.talents.map((talent) => {
+                                            return (
+                                                <div className='talents__talent' key={talent.id}>
+                                                    {talent.name}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            );
+                        })}
+
+                    </div>
+                : <div>Cannot find spheres for this category.</div>
+                }
             </React.Fragment>
         );
     }
