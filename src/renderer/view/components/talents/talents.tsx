@@ -60,10 +60,19 @@ interface ITalentsCardState {
                 {this.props.talents.spheres[this.state.currentCategory] ?
                     <div className='talents__sphere-container'>
                         {this.props.talents.spheres[this.state.currentCategory].map((sphere) => {
+                            const isSphereExpanded = this.state.expandedSpheres.includes(sphere.name);
                             return (
                                 <div className='talents__sphere' key={sphere.name}>
-                                    <div className='talents__sphere-name' onClick={() => this.toggleSphereDisplay(sphere.name)}>{sphere.name}</div>
-                                    <div className='talents__talent-container' hidden={!this.state.expandedSpheres.includes(sphere.name)}>
+                                    <div className='talents__sphere-controls'>
+                                        <span className='talents__sphere-name'>{sphere.name}</span>
+                                        <span
+                                            className={'talents__sphere-expand talents__sphere-expand--' + (isSphereExpanded ? 'collapse' : 'expand')}
+                                            onClick={() => this.toggleSphereDisplay(sphere.name)}
+                                        >
+                                            ︾
+                                        </span>
+                                    </div>
+                                    <div className='talents__talent-container' hidden={!isSphereExpanded}>
                                         {sphere.talents.map((talent) => {
                                             return (
                                                 <div className='talents__talent' key={talent.id}>

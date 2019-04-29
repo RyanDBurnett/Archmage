@@ -73,6 +73,19 @@ $CATEGORY_RIBBON_WIDTH: $CATEGORY_RIBBON_INSET * 2;
         &-name {
             text-transform: capitalize;
         }
+
+        &-expand {
+            float: right;
+            transition: transform .1s;
+
+            &--expand {
+                transform: rotate(0deg);
+            }
+
+            &--collapse {
+                transform: rotate(180deg)
+            }
+        }
     }
 
     &__talent-container {
