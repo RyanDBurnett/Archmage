@@ -8,14 +8,16 @@ import Profile from './profile/profile';
 import AbilityScores from './ability-scores/ability-scores';
 import Levels from './levels/levels';
 import SphereParser from './talents/sphere-parser';
-import Talents from './talents/talents';
+import TalentLibrary from './talents/talent-library';
+import TalentCollection from './talents/talent-collection';
 
 export default class Store {
     @observable profile: Profile;
     @observable abilityScores: AbilityScores;
     @observable levels: Levels;
     @observable currentEditorView: EditorViews;
-    @observable talents: Talents;
+    talentLibrary: TalentLibrary;
+    @observable playerTalents: TalentCollection;
 
     constructor() {
         this.profile = new Profile();
@@ -24,7 +26,8 @@ export default class Store {
         this.currentEditorView = EditorViews.Profile;
         const sphereParser = new SphereParser();
         const spheres = sphereParser.parseSpheres();
-        this.talents = new Talents(spheres)
+        this.talentLibrary = new TalentLibrary(spheres);
+        this.playerTalents = new TalentCollection(this.talentLibrary);
     }
 
     @action changeView(newView: EditorViews) {
@@ -36,7 +39,6 @@ export default class Store {
             profile: this.profile,
             abilityScores: this.abilityScores.getJsonParsableAbilityScores(),
             levels: this.levels.levels
-
         };
 
         console.error(characterData);

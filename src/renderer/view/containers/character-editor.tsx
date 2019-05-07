@@ -125,7 +125,7 @@ interface ICharacterEditorState {
                 pageContent = <LevelsCard levels={this.props.store.levels} />
                 break;
             case EditorViews.Talents:
-                pageContent = <TalentsCard talents={this.props.store.talents} />
+                pageContent = <TalentsCard playerTalents={this.props.store.playerTalents} />
                 break;
         }
 

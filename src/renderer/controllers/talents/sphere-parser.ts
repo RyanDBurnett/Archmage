@@ -1,32 +1,5 @@
 import * as fs from 'fs';
-
-export enum SphereCategories {
-    combat = 'combat',
-    magic = 'magic',
-    skills = 'skills'
-}
-
-export interface ISphereCollection {
-    combat: ISphere[],
-    magic: ISphere[],
-    skills: ISphere[],
-    [key: string]: ISphere[]
-}
-
-interface ISphere {
-    name: string,
-    talents: ITalent[]
-}
-
-interface ITalent {
-    id: string,
-    name: string,
-    category: SphereCategories
-    stub: string,
-    prereqs: string[],
-    benefits: string[],
-    notes: string[] | null
-}
+import { ISphereCollection, ISphere, ITalent, SphereCategories } from './talent-library';
 
 export default class SphereParser {
     constructor() {
@@ -42,36 +15,42 @@ export default class SphereParser {
         for(const category in SphereCategories) {
             let spheresList =  fs.readdirSync('./spheres/' + category);
 
-            spheres[category] = spheresList.map((sphereName) => {
-                return this.parseSphere(sphereName, category)
+            spheres[category] = spheresList.map((sphereId) => {
+                return this.parseSphere(sphereId, category)
             });
         }
 
         return spheres;
     }
 
-    parseSphere(sphereName: string, category: string) {
-        let sphere = <ISphere>{
-            name: sphereName,
+    parseSphere(sphereId: string, category: string) {
+        let sphere = {
+            id: sphereId,
+            coreTalent: <ITalent | null>null,
             talents:<ITalent[]>[]
         };
 
-        let talents = fs.readdirSync('./spheres/' + category + '/' + sphereName);
+        let talents = fs.readdirSync('./spheres/' + category + '/' + sphereId);
 
         talents.map((talentName) => {
-            let fileContents = fs.readFileSync('./spheres/' + category + '/' + sphereName + '/' + talentName, {encoding: 'utf8'});
-
+            let fileContents = fs.readFileSync('./spheres/' + category + '/' + sphereId + '/' + talentName, {encoding: 'utf8'});
 
             const rawTalent = JSON.parse(fileContents);
             const fullTalent = <ITalent>
             {
                 category,
+                sphereId,
                 ...rawTalent
             };
 
-            sphere.talents.push(fullTalent);
+            console.error(fullTalent.id);
+            if (fullTalent.id === sphere.id || fullTalent.id === 'core') {
+                sphere.coreTalent = fullTalent;
+            } else {
+                sphere.talents.push(fullTalent);
+            }
         });
         
-        return sphere;
+        return <ISphere>sphere;
     }
 }

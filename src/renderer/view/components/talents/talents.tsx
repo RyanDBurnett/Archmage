@@ -4,11 +4,11 @@ import '../generics/cards.scss';
 
 import './talents.scss';
 
-import Talents from '@controllers/talents/talents';
-import { SphereCategories } from '@controllers/talents/sphere-parser';
+import TalentCollection, {ISpherePlaceholder} from '@controllers/talents/talent-collection';
+import { SphereCategories, ISphere } from '@controllers/talents/talent-library';
 
 interface ITalentsCardProps {
-    talents: Talents
+    playerTalents: TalentCollection
 }
 
 interface ITalentsCardState {
@@ -40,6 +40,47 @@ interface ITalentsCardState {
         this.setState({expandedSpheres: newSpheres});
     }
 
+    private renderSphereCollection(spheres: ISpherePlaceholder[]) {
+        if (spheres.length === 0) {
+            return (<div>Cannot find spheres for this category.</div>);
+        }
+        const fullSpheres = spheres.map((sphere) => this.props.playerTalents.talentLibrary.getSphereById(sphere.id));
+
+        return (
+            <React.Fragment>
+                <div className='talents__sphere-container'>
+                    {fullSpheres.map((sphere) => this.renderSphere(sphere))}
+                </div>
+            </React.Fragment>
+        );
+    }
+
+    private renderSphere(sphere: ISphere) {
+        const isSphereExpanded = this.state.expandedSpheres.includes(sphere.id);
+        return (
+            <div className='talents__sphere' key={sphere.id}>
+                <div className='talents__sphere-controls'>
+                    <span className='talents__sphere-name'>{sphere.id}</span>
+                    <span
+                        className={'talents__sphere-expand talents__sphere-expand--' + (isSphereExpanded ? 'collapse' : 'expand')}
+                        onClick={() => this.toggleSphereDisplay(sphere.id)}
+                    >
+                        ︾
+                    </span>
+                </div>
+                <div className='talents__talent-container' hidden={!isSphereExpanded}>
+                    {sphere.talents.map((talent) => {
+                        return (
+                            <div className='talents__talent' key={talent.id}>
+                                {talent.name}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+
     public render() {
         return (
             <React.Fragment>
@@ -57,37 +98,13 @@ interface ITalentsCardState {
                     })}
                 </div>
                 
-                {this.props.talents.spheres[this.state.currentCategory] ?
-                    <div className='talents__sphere-container'>
-                        {this.props.talents.spheres[this.state.currentCategory].map((sphere) => {
-                            const isSphereExpanded = this.state.expandedSpheres.includes(sphere.name);
-                            return (
-                                <div className='talents__sphere' key={sphere.name}>
-                                    <div className='talents__sphere-controls'>
-                                        <span className='talents__sphere-name'>{sphere.name}</span>
-                                        <span
-                                            className={'talents__sphere-expand talents__sphere-expand--' + (isSphereExpanded ? 'collapse' : 'expand')}
-                                            onClick={() => this.toggleSphereDisplay(sphere.name)}
-                                        >
-                                            ︾
-                                        </span>
-                                    </div>
-                                    <div className='talents__talent-container' hidden={!isSphereExpanded}>
-                                        {sphere.talents.map((talent) => {
-                                            return (
-                                                <div className='talents__talent' key={talent.id}>
-                                                    {talent.name}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            );
-                        })}
+                {this.renderSphereCollection(this.props.playerTalents.sphereCollection[this.state.currentCategory])}
+                
+                <div className='hr'></div>
 
-                    </div>
-                : <div>Cannot find spheres for this category.</div>
-                }
+                {this.renderSphereCollection(
+                    this.props.playerTalents.talentLibrary.getSpheresInCategory(this.state.currentCategory)
+                        .map(this.props.playerTalents.talentLibrary.convertSphereToSpherePlaceholder))}
             </React.Fragment>
         );
     }
