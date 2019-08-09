@@ -8,10 +8,13 @@ export enum AbilityScoreNames {
     // them as object accessors below.
     STR = 'STR',
     DEX = 'DEX',
+    AGI = 'AGI',
     CON = 'CON',
     INT = 'INT',
     WIS = 'WIS',
-    CHA = 'CHA'
+    PER = 'PER',
+    CHA = 'CHA',
+    LCK = 'LCK'
 }
 
 export interface IAbilityScore {
@@ -25,10 +28,13 @@ export default class AbilityScores {
     [index: string] : any;
     @observable STR: IAbilityScore
     @observable DEX: IAbilityScore
+    @observable AGI: IAbilityScore
     @observable CON: IAbilityScore
     @observable INT: IAbilityScore
     @observable WIS: IAbilityScore
+    @observable PER: IAbilityScore
     @observable CHA: IAbilityScore
+    @observable LCK: IAbilityScore
 
     constructor() {
         this.STR = {
@@ -37,6 +43,11 @@ export default class AbilityScores {
         }
 
         this.DEX = {
+            value: 10,
+            bonus: 0
+        }
+
+        this.AGI = {
             value: 10,
             bonus: 0
         }
@@ -56,7 +67,17 @@ export default class AbilityScores {
             bonus: 0
         }
 
+        this.PER = {
+            value: 10,
+            bonus: 0
+        }
+
         this.CHA = {
+            value: 10,
+            bonus: 0
+        }
+
+        this.LCK = {
             value: 10,
             bonus: 0
         }
@@ -81,19 +102,25 @@ export default class AbilityScores {
         return {
             str: this.STR.value,
             dex: this.DEX.value,
+            agi: this.AGI.value,
             con: this.CON.value,
             int: this.INT.value,
             wis: this.WIS.value,
-            cha: this.CHA.value
+            per: this.PER.value,
+            cha: this.CHA.value,
+            lck: this.LCK.value
         }
     }
 
     loadSavedAbilityScores(scores: any) {
         this.setAbilityScore(AbilityScoreNames.STR, scores.str);
         this.setAbilityScore(AbilityScoreNames.DEX, scores.dex);
+        this.setAbilityScore(AbilityScoreNames.AGI, scores.agi);
         this.setAbilityScore(AbilityScoreNames.CON, scores.con);
         this.setAbilityScore(AbilityScoreNames.INT, scores.int);
         this.setAbilityScore(AbilityScoreNames.WIS, scores.wis);
+        this.setAbilityScore(AbilityScoreNames.PER, scores.per);
         this.setAbilityScore(AbilityScoreNames.CHA, scores.cha);
+        this.setAbilityScore(AbilityScoreNames.LCK, scores.lck);
     }
   }
