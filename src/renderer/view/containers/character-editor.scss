@@ -10,6 +10,7 @@ $ABILITY_SCORES_COLOR: #74D674;
 $PROFILE_COLOR: #7474D6;
 $LEVEL_COLOR: #AA3300;
 $TALENTS_COLOR: #6666FF;
+$TRAITS_COLOR: #777700;
 
 $SAVE_COLOR: #D6D674;
 $LOAD_COLOR: #007474;
@@ -65,6 +66,10 @@ $LOAD_COLOR: #007474;
 
         &.Talents {
             @include bookmark-ribbon($TALENTS_COLOR);
+        }
+
+        &.Traits {
+            @include bookmark-ribbon($TRAITS_COLOR);
         }
 
         &.save-button {

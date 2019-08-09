@@ -3,5 +3,6 @@ export enum EditorViews {
     AbilityScores = 'Ability Scores',
     Profile = 'Profile',
     Levels = 'Levels',
-    Talents = 'Talents'
+    Talents = 'Talents',
+    Traits = 'Traits'
 }
